@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <PackageId>Novolis.Blazor.GraphicalProfile</PackageId>
+    <RootNamespace>Novolis.Blazor.GraphicalProfile</RootNamespace>
+    <Description>Required Novolis graphical profile for Blazor hosts: CSS tokens and the shared chrome stylesheet.</Description>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
+  </ItemGroup>
+</Project>

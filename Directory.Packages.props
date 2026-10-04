@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageFloatingVersionsEnabled>true</CentralPackageFloatingVersionsEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="10.0.12" />
+    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.401" />
+    <PackageVersion Include="Novolis.Markup.Mermaid" Version="2026.1.*" />
+    <PackageVersion Include="Novolis.Markup.Mermaid.Rendering" Version="2026.1.*" />
+    <PackageVersion Include="TUnit" Version="1.72.16" />
+  </ItemGroup>
+</Project>

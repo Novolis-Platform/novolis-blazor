@@ -1,0 +1,34 @@
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Rendering
+@using Novolis.Markup.Mermaid.Rendering
+
+<div class="@Class" role="img" aria-label="@AriaLabel">
+    @if (Svg is null)
+    {
+        <pre class="novolis-mermaid-error">@Mermaid</pre>
+    }
+    else
+    {
+        @((MarkupString)Svg)
+    }
+</div>
+
+@code {
+    /// <summary>Mermaid source to render.</summary>
+    [Parameter, EditorRequired]
+    public string Mermaid { get; set; } = string.Empty;
+
+    /// <summary>Rendering theme.</summary>
+    [Parameter]
+    public MermaidRenderTheme Theme { get; set; } = MermaidRenderTheme.StudioDark;
+
+    /// <summary>CSS class for the host element.</summary>
+    [Parameter]
+    public string? Class { get; set; }
+
+    /// <summary>Accessible description.</summary>
+    [Parameter]
+    public string AriaLabel { get; set; } = "Mermaid diagram";
+
+    private string? Svg => MermaidSvgRenderer.TryRenderSvg(Mermaid, Theme);
+}
