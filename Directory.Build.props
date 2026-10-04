@@ -22,4 +22,6 @@
           Condition="Exists('$(MSBuildThisFileDirectory)..\novolis-governance\build\Novolis.GitHubPackages.props')" />
   <Import Project="$(MSBuildThisFileDirectory)..\novolis-governance\build\Novolis.OneTypePerFile.props"
           Condition="Exists('$(MSBuildThisFileDirectory)..\novolis-governance\build\Novolis.OneTypePerFile.props')" />
+  <Import Project="$(MSBuildThisFileDirectory)..\novolis-governance\build\Novolis.PackageReadme.props"
+          Condition="Exists('$(MSBuildThisFileDirectory)..\novolis-governance\build\Novolis.PackageReadme.props')" />
 </Project>
