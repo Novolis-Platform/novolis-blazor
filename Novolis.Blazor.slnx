@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/Novolis.Blazor.Components/Novolis.Blazor.Components.csproj" />
     <Project Path="src/Novolis.Blazor.Mermaid/Novolis.Blazor.Mermaid.csproj" />
     <Project Path="src/Novolis.Blazor.GraphicalProfile/Novolis.Blazor.GraphicalProfile.csproj" />
   </Folder>

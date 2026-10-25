@@ -1,0 +1,56 @@
+<section class="card@(Quiet ? " quiet" : "")" id="@Id" aria-labelledby="@AriaLabel">
+    @if (!string.IsNullOrWhiteSpace(Eyebrow))
+    {
+        <p class="eyebrow">@Eyebrow</p>
+    }
+    @if (!string.IsNullOrWhiteSpace(Title))
+    {
+        if (Heading == SectionHeading.Section)
+        {
+            <h2 id="@headingId">@Title</h2>
+        }
+        else
+        {
+            <h1 id="@headingId">@Title</h1>
+        }
+    }
+    @if (!string.IsNullOrWhiteSpace(Lead))
+    {
+        <p class="muted">@Lead</p>
+    }
+    @ChildContent
+</section>
+
+@code {
+    private readonly string headingId = "section-" + Guid.NewGuid().ToString("N");
+
+    /// <summary>Small label above the title.</summary>
+    [Parameter]
+    public string? Eyebrow { get; set; }
+
+    /// <summary>Card heading.</summary>
+    [Parameter]
+    public string? Title { get; set; }
+
+    /// <summary>Muted line under the title.</summary>
+    [Parameter]
+    public string? Lead { get; set; }
+
+    /// <summary>Page title or section title.</summary>
+    [Parameter]
+    public SectionHeading Heading { get; set; } = SectionHeading.Page;
+
+    /// <summary>Raised surface instead of the default card surface.</summary>
+    [Parameter]
+    public bool Quiet { get; set; }
+
+    /// <summary>Optional element id.</summary>
+    [Parameter]
+    public string? Id { get; set; }
+
+    /// <summary>Body under the heading.</summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    private string? AriaLabel => string.IsNullOrWhiteSpace(Title) ? null : headingId;
+}

@@ -8,6 +8,14 @@ dotnet add package Novolis.Blazor.GraphicalProfile
 
 Link `GraphicalProfile.StylesheetHref` from the host `index.html` and use `--ngp-*` tokens.
 
+Install the chrome components:
+
+```powershell
+dotnet add package Novolis.Blazor.Components
+```
+
+Link `Chrome.StylesheetHref` after the profile tokens. Hosts then use `AppChrome`, `SectionCard`, `LinkCard`, `CardList`, `PageHeader`, `ConfirmDialog`, `ArticleView`, `EntryList`, and `NotFoundView`.
+
 Install the Mermaid component:
 
 ```powershell

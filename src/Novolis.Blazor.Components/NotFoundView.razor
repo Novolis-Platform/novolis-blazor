@@ -1,0 +1,18 @@
+<main>
+    <h1>@Title</h1>
+    <p class="back"><a href="@LinkHref">@LinkLabel</a></p>
+</main>
+
+@code {
+    /// <summary>Heading. Hosts still set the HTTP status.</summary>
+    [Parameter]
+    public string Title { get; set; } = "Not found";
+
+    /// <summary>Destination for the recovery link.</summary>
+    [Parameter]
+    public string LinkHref { get; set; } = "/";
+
+    /// <summary>Recovery link text.</summary>
+    [Parameter]
+    public string LinkLabel { get; set; } = "Back home";
+}

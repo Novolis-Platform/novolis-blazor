@@ -1,0 +1,41 @@
+<header class="page-header">
+    @if (!string.IsNullOrWhiteSpace(Eyebrow))
+    {
+        <p class="eyebrow">@Eyebrow</p>
+    }
+    @if (TitleContent is not null)
+    {
+        <h1>@TitleContent</h1>
+    }
+    else if (!string.IsNullOrWhiteSpace(Title))
+    {
+        <h1>@Title</h1>
+    }
+    @if (!string.IsNullOrWhiteSpace(Lede))
+    {
+        <p class="lede">@Lede</p>
+    }
+    @ChildContent
+</header>
+
+@code {
+    /// <summary>Small label above the title.</summary>
+    [Parameter]
+    public string? Eyebrow { get; set; }
+
+    /// <summary>Page title. Ignored when <see cref="TitleContent"/> is set.</summary>
+    [Parameter]
+    public string? Title { get; set; }
+
+    /// <summary>Title markup, for a single accented word.</summary>
+    [Parameter]
+    public RenderFragment? TitleContent { get; set; }
+
+    /// <summary>Line under the title.</summary>
+    [Parameter]
+    public string? Lede { get; set; }
+
+    /// <summary>Content under the lede, such as a row of links.</summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

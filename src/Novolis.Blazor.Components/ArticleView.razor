@@ -1,0 +1,55 @@
+<main class="article">
+    @if (!string.IsNullOrWhiteSpace(Kicker))
+    {
+        <p class="eyebrow">@Kicker</p>
+    }
+    @if (Tags is { Count: > 0 })
+    {
+        <p class="tags">@string.Join(" · ", Tags)</p>
+    }
+    @if (!string.IsNullOrWhiteSpace(Title))
+    {
+        <h1>@Title</h1>
+    }
+    @if (!string.IsNullOrWhiteSpace(Lede))
+    {
+        <p class="lede">@Lede</p>
+    }
+    <article class="body">
+        @ChildContent
+    </article>
+    @if (!string.IsNullOrWhiteSpace(BackHref))
+    {
+        <p class="back"><a href="@BackHref">@BackLabel</a></p>
+    }
+</main>
+
+@code {
+    /// <summary>Small label above the title.</summary>
+    [Parameter]
+    public string? Kicker { get; set; }
+
+    /// <summary>Labels joined with a middot.</summary>
+    [Parameter]
+    public IReadOnlyList<string>? Tags { get; set; }
+
+    /// <summary>Article title.</summary>
+    [Parameter]
+    public string? Title { get; set; }
+
+    /// <summary>Line under the title, before the body.</summary>
+    [Parameter]
+    public string? Lede { get; set; }
+
+    /// <summary>Article body.</summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>Destination for the link under the body. Empty omits the link.</summary>
+    [Parameter]
+    public string? BackHref { get; set; }
+
+    /// <summary>Text for the link under the body.</summary>
+    [Parameter]
+    public string BackLabel { get; set; } = "Back";
+}

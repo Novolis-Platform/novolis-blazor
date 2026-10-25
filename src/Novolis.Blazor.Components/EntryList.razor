@@ -1,0 +1,28 @@
+<ul class="entries">
+    @foreach (var item in Items)
+    {
+        <li>
+            <a href="@item.Href">
+                @if (!string.IsNullOrWhiteSpace(item.Kicker))
+                {
+                    <span class="eyebrow">@item.Kicker</span>
+                }
+                @if (item.Tags is { Count: > 0 })
+                {
+                    <span class="tags">@string.Join(" · ", item.Tags)</span>
+                }
+                <strong>@item.Title</strong>
+                @if (!string.IsNullOrWhiteSpace(item.Excerpt))
+                {
+                    <span class="excerpt">@item.Excerpt</span>
+                }
+            </a>
+        </li>
+    }
+</ul>
+
+@code {
+    /// <summary>Rows, newest first when the host orders them that way.</summary>
+    [Parameter, EditorRequired]
+    public IReadOnlyList<EntryItem> Items { get; set; } = [];
+}

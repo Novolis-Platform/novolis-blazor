@@ -1,0 +1,73 @@
+@if (Visible)
+{
+    <div class="dialog-back" role="presentation">
+        <section class="dialog" role="dialog" aria-modal="true" aria-labelledby="@titleId" tabindex="-1" @ref="dialog" @onkeydown="OnKeyDown">
+            <h2 id="@titleId">@Title</h2>
+            <p>@Body</p>
+            <div class="toolbar">
+                <button type="button" class="action" @onclick="OnConfirm">@Commit</button>
+                <button type="button" class="ghost" @onclick="OnCancel">@Cancel</button>
+            </div>
+        </section>
+    </div>
+}
+
+@code {
+    private readonly string titleId = "confirm-" + Guid.NewGuid().ToString("N");
+    private ElementReference dialog;
+    private bool focused;
+
+    /// <summary>When true, and <see cref="Title"/> is not blank, the dialog is shown.</summary>
+    [Parameter]
+    public bool Open { get; set; }
+
+    /// <summary>Dialog heading. A blank title keeps the dialog closed.</summary>
+    [Parameter]
+    public string Title { get; set; } = "Confirm";
+
+    /// <summary>Explanation under the heading.</summary>
+    [Parameter]
+    public string Body { get; set; } = string.Empty;
+
+    /// <summary>Primary button label.</summary>
+    [Parameter]
+    public string Commit { get; set; } = "Confirm";
+
+    /// <summary>Secondary button label.</summary>
+    [Parameter]
+    public string Cancel { get; set; } = "Cancel";
+
+    /// <summary>Raised when the primary button is pressed. The host closes the dialog.</summary>
+    [Parameter]
+    public EventCallback Confirmed { get; set; }
+
+    /// <summary>Raised when the secondary button is pressed or Escape is pressed. The host closes the dialog.</summary>
+    [Parameter]
+    public EventCallback Cancelled { get; set; }
+
+    private bool Visible => Open && !string.IsNullOrWhiteSpace(Title);
+
+    /// <inheritdoc />
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (Visible)
+        {
+            if (!focused)
+            {
+                focused = true;
+                await dialog.FocusAsync();
+            }
+        }
+        else
+        {
+            focused = false;
+        }
+    }
+
+    private Task OnConfirm() => Confirmed.InvokeAsync();
+
+    private Task OnCancel() => Cancelled.InvokeAsync();
+
+    private Task OnKeyDown(KeyboardEventArgs args) =>
+        args.Key == "Escape" ? OnCancel() : Task.CompletedTask;
+}

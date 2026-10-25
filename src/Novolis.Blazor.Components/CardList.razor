@@ -1,0 +1,13 @@
+<ul class="@(Variant == CardListVariant.Grid ? "grid" : "deck")">
+    @ChildContent
+</ul>
+
+@code {
+    /// <summary>Column layout. Items are <c>li</c> elements supplied by the host.</summary>
+    [Parameter]
+    public CardListVariant Variant { get; set; } = CardListVariant.Deck;
+
+    /// <summary>List items, usually an <c>li</c> around a <see cref="LinkCard"/>.</summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

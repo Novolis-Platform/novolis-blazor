@@ -1,0 +1,42 @@
+@if (string.IsNullOrWhiteSpace(Href))
+{
+    <article class="link-card">
+        @Inner
+    </article>
+}
+else
+{
+    <a class="link-card" href="@Href">
+        @Inner
+    </a>
+}
+
+@code {
+    /// <summary>Destination. Empty renders an article instead of a link.</summary>
+    [Parameter]
+    public string? Href { get; set; }
+
+    /// <summary>Small label above the title.</summary>
+    [Parameter]
+    public string? Kicker { get; set; }
+
+    /// <summary>Card title.</summary>
+    [Parameter, EditorRequired]
+    public string Title { get; set; } = string.Empty;
+
+    /// <summary>One line under the title.</summary>
+    [Parameter]
+    public string? Text { get; set; }
+
+    private RenderFragment Inner => @<text>
+        @if (!string.IsNullOrWhiteSpace(Kicker))
+        {
+            <span class="eyebrow">@Kicker</span>
+        }
+        <strong>@Title</strong>
+        @if (!string.IsNullOrWhiteSpace(Text))
+        {
+            <span class="muted">@Text</span>
+        }
+    </text>;
+}

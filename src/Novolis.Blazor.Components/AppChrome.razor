@@ -1,0 +1,73 @@
+<div class="page-shell">
+    <header class="chrome">
+        @if (string.IsNullOrWhiteSpace(WordmarkHref))
+        {
+            <span class="wordmark">@Wordmark</span>
+        }
+        else
+        {
+            <a class="wordmark" href="@WordmarkHref">@Wordmark</a>
+        }
+        @Subtitle
+        @if (HasNav)
+        {
+            <nav class="toolbar" aria-label="@NavLabel">
+                @if (Links is not null)
+                {
+                    @foreach (var link in Links)
+                    {
+                        if (link.External)
+                        {
+                            <a href="@link.Href">@link.Label</a>
+                        }
+                        else
+                        {
+                            <NavLink href="@link.Href" Match="@link.Match" ActiveClass="current">@link.Label</NavLink>
+                        }
+                    }
+                }
+                @if (ShowTrailing)
+                {
+                    @Trailing
+                }
+            </nav>
+        }
+    </header>
+    @ChildContent
+</div>
+
+@code {
+    /// <summary>Brand text in the header.</summary>
+    [Parameter, EditorRequired]
+    public string Wordmark { get; set; } = string.Empty;
+
+    /// <summary>Destination for the wordmark. Empty renders the wordmark as text.</summary>
+    [Parameter]
+    public string? WordmarkHref { get; set; } = "/";
+
+    /// <summary>Accessible name for the navigation.</summary>
+    [Parameter]
+    public string NavLabel { get; set; } = "Navigation";
+
+    /// <summary>In-app and external destinations.</summary>
+    [Parameter]
+    public IReadOnlyList<ChromeLink>? Links { get; set; }
+
+    /// <summary>Text beside the wordmark, such as a person or a section name.</summary>
+    [Parameter]
+    public RenderFragment? Subtitle { get; set; }
+
+    /// <summary>Controls after the links, such as a sign-out button or form.</summary>
+    [Parameter]
+    public RenderFragment? Trailing { get; set; }
+
+    /// <summary>When true, <see cref="Trailing"/> is rendered. An empty fragment still counts as present, so hosts opt in.</summary>
+    [Parameter]
+    public bool ShowTrailing { get; set; }
+
+    /// <summary>Page body under the header.</summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    private bool HasNav => Links is { Count: > 0 } || (ShowTrailing && Trailing is not null);
+}
