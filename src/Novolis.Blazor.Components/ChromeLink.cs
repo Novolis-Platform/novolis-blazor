@@ -7,8 +7,10 @@ namespace Novolis.Blazor.Components;
 /// <param name="Label">Visible link text.</param>
 /// <param name="External">When true, render a plain anchor instead of a route link.</param>
 /// <param name="Match">How an in-app link decides it is current.</param>
+/// <param name="ForceLoad">When true, the browser performs a full navigation (use for interactive routes).</param>
 public sealed record ChromeLink(
     string Href,
     string Label,
     bool External = false,
-    NavLinkMatch Match = NavLinkMatch.Prefix);
+    NavLinkMatch Match = NavLinkMatch.Prefix,
+    bool ForceLoad = false);
