@@ -1,0 +1,20 @@
+@namespace Novolis.Blazor.Components
+
+<a class="@CssClass"
+   href="@Href"
+   data-enhance-nav="false"
+   rel="nofollow">@Label</a>
+
+@code {
+    /// <summary>Absolute or relative URL that challenges Microsoft Entra (full browser navigation).</summary>
+    [Parameter, EditorRequired]
+    public string Href { get; set; } = string.Empty;
+
+    /// <summary>Button label.</summary>
+    [Parameter]
+    public string Label { get; set; } = "Sign in with Microsoft";
+
+    /// <summary>CSS class list. Defaults to the shared action style.</summary>
+    [Parameter]
+    public string CssClass { get; set; } = "action";
+}
